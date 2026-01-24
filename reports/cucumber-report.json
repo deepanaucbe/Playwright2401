@@ -1,0 +1,224 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "orangehrm-login;login,-navigate-to-admin-and-logout",
+        "keyword": "Scenario",
+        "line": 5,
+        "name": "Login, navigate to Admin and logout",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1516303900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "user is on OrangeHRM login page",
+            "match": {
+              "location": "tests\\step-definitions\\login.steps.js:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8689221599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 7,
+            "name": "user enters username \"Admin\" and password \"admin123\"",
+            "match": {
+              "location": "tests\\step-definitions\\login.steps.js:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3560828400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 8,
+            "name": "user should see Admin menu",
+            "match": {
+              "location": "tests\\step-definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 948858399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 9,
+            "name": "user clicks Admin menu",
+            "match": {
+              "location": "tests\\step-definitions\\login.steps.js:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3161038000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "user logs out",
+            "match": {
+              "location": "tests\\step-definitions\\login.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2877498899
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 661216599
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke",
+            "line": 1
+          },
+          {
+            "name": "@regression",
+            "line": 4
+          },
+          {
+            "name": "@login",
+            "line": 4
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orangehrm-login;admin-adds-a-new-user-and-verifies-it",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "Admin adds a new user and verifies it",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 987668799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "user is logged into OrangeHRM",
+            "match": {
+              "location": "tests\\step-definitions\\login.steps.js:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15185713899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "user navigates to Admin page",
+            "match": {
+              "location": "tests\\step-definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4079316499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "user adds a new user",
+            "match": {
+              "location": "tests\\step-definitions\\login.steps.js:46"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6988276400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "user should see the user in system users list",
+            "match": {
+              "location": "tests\\step-definitions\\login.steps.js:57"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5784525900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "user logs out",
+            "match": {
+              "location": "tests\\step-definitions\\login.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1825622499
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 601182799
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke",
+            "line": 1
+          },
+          {
+            "name": "@adduser",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "orangehrm-login",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "OrangeHRM Login",
+    "tags": [
+      {
+        "name": "@smoke",
+        "line": 1
+      }
+    ],
+    "uri": "tests\\features\\login.feature"
+  }
+]
