@@ -160,6 +160,8 @@ await inputs.first().waitFor({ state: 'visible', timeout: 15000 });
 // console.log('Hour inputs found:', count);
 
 // Fill Monday to Friday
+
+
 await expect(
   this.page.locator(this.projectInput)
 ).toHaveValue(project);
