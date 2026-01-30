@@ -54,16 +54,13 @@ class TimesheetPage {
   await this.page.locator('span:has-text("Time")').click();
 
   // Click Timesheets dropdown
-  const timesheetsDropdown = this.page.locator(
-    'span.oxd-topbar-body-nav-tab-item:has-text("Timesheets")'
+  const timesheetsDropdown = this.page.locator('span.oxd-topbar-body-nav-tab-item:has-text("Timesheets")'
   );
   await timesheetsDropdown.waitFor({ state: 'visible', timeout: 15000 });
   await timesheetsDropdown.click();
 
   // Click Employee Timesheets option
-  const employeeTimesheets = this.page.locator(
-    'a.oxd-topbar-body-nav-tab-link:has-text("Employee Timesheets")'
-  );
+  const employeeTimesheets = this.page.locator('a.oxd-topbar-body-nav-tab-link:has-text("Employee Timesheets")');
   await employeeTimesheets.waitFor({ state: 'visible', timeout: 15000 });
   await employeeTimesheets.click();
 }
@@ -73,14 +70,15 @@ class TimesheetPage {
   async searchEmployeeOrStop(empName) {
   const input = this.page.locator(this.employeeNameInput);
 
-  await input.click();
-  await input.fill('');
-  await input.type(empName, { delay: 120 });
 
-  const option = this.page
-    .locator(this.autoSuggestOption)
-    .filter({ hasText: empName })
-    .first();
+
+  await input.click();
+await input.fill(empName);
+
+// 🔑 wait until at least one suggestion appears
+await this.page.waitForSelector(this.autoSuggestOption, {state: 'visible',timeout: 15000});
+
+  const option = this.page.locator(this.autoSuggestOption).filter({ hasText: empName }).first();
 
   await option.waitFor({ state: 'visible', timeout: 10000 });
   await option.click();
@@ -116,12 +114,7 @@ class TimesheetPage {
 
   // ✅ EXISTING CODE CONTINUES
   await this.page.waitForSelector(this.projectInput, { timeout: 15000 });
-
   await this.page.fill(this.projectInput, project);
-//   const Pinput=this.page.locator(this.projectInput);
-//   await Pinput.click();
-//   await Pinput.fill('');
-//   await Pinput.type(project, { delay: 120 });
   const projectOption = this.page.locator(this.autoSuggestOption).filter({ hasText: project }).first();
   await projectOption.waitFor({ state: 'visible', timeout: 100000 });
   await projectOption.click();
@@ -131,46 +124,41 @@ const activityDrop = this.page.locator(this.activityDropdown);
 await activityDrop.waitFor({ state: 'visible' });
 await activityDrop.click();
 
-const activityOpt = this.page
-  .locator(this.activityOption)
-  .filter({ hasText: activity })
-  .first();
-
+const activityOpt = this.page.locator(this.activityOption).filter({ hasText: activity }).first();
 await activityOpt.waitFor({ state: 'visible' });
 await activityOpt.click();
-
+// 🔑 COMMIT selection (very important)
+await this.page.keyboard.press('Enter');
 // ✅ VERY IMPORTANT: wait until activity text is locked
-await expect(activityDrop).toContainText(activity);
+await expect(activityDrop).toContainText(new RegExp(activity, 'i'));
+  //---- Hours (Mon–Fri) ----
+// const inputs = this.page.locator(this.dayHourInputs);
+// // wait until inputs exist
+// await inputs.first().waitFor({ state: 'visible', timeout: 15000 });
 
+// await expect(
+//   this.page.locator(this.projectInput)
+// ).toHaveValue(project);
 
-  // await this.page.keyboard.press('Tab');
-  // await this.page.waitForTimeout(500);
+// this.page.locator(this.dayHourInputs);
+// await inputs.first().waitFor({ state: 'visible' });
 
-  // await this.page.locator(this.activityDropdown).click();
-  // await this.page.locator(this.activityOption).filter({ hasText: activity }).click();
-
-  // ---- Hours (Mon–Fri) ----
+// for (let i = 0; i < 5; i++) {
+//   const input = this.page.locator(this.dayHourInputs).nth(i);
+//   await input.click();
+//   await input.fill(hours);
+//   await this.page.waitForTimeout(150); // small UI settle
+// }
+// ---- Hours (Mon–Fri) ----
 const inputs = this.page.locator(this.dayHourInputs);
 
-// wait until inputs exist
-await inputs.first().waitFor({ state: 'visible', timeout: 15000 });
+// Click Monday input
+await inputs.first().click();
 
-// Debug safety (optional)
-// const count = await inputs.count();
-// console.log('Hour inputs found:', count);
-
-// Fill Monday to Friday
-
-
-await expect(
-  this.page.locator(this.projectInput)
-).toHaveValue(project);
-
-const inputs = this.page.locator(this.dayHourInputs);
-await inputs.first().waitFor({ state: 'visible' });
-
+// Type like a real user and move with TAB
 for (let i = 0; i < 5; i++) {
-  await inputs.nth(i).fill(hours);
+  await this.page.keyboard.type(hours);
+  await this.page.keyboard.press('Tab');
 }
 
 
